@@ -40,6 +40,10 @@ social_links:
     link: 13242654900
     copy: true
   -
+    icon: phone
+    link: 13242654900
+    copy: true
+  -
     icon: mail
     link: mailto:973672492@qq.com
     copy: false
