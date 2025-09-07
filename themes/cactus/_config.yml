@@ -30,15 +30,19 @@ social_links:
   -
     icon: github
     link: https://github.com/Linkodt
+    copy: false
   -
     icon: gitlab
     link: https://gitee.com/kodt
+    copy: false
   -
     icon: weixin
     link: 13242654900
+    copy: true
   -
     icon: mail
     link: mailto:973672492@qq.com
+    copy: false
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
