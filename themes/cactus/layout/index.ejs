@@ -17,10 +17,10 @@
           <a class="icon" target="_blank" rel="noopener" href="<%- link %>" aria-label="<%- title %>" title="<%- title %>">
             <i class="fa-solid fa-rss"></i>
           </a>
-        <% } else if (copy == 'true') { %>
+        <% } else if (String(copy) == 'true') { %>
         <a class="icon u-url" href="javascript:void(0)" rel="noopener me" aria-label="<%- title %>" title="<%- title %>"
            data-link="<%= url_for(link) %>"
-           onclick="event.preventDefault();var text=this.getAttribute('data-link');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).catch(function(){var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();try{document.execCommand('copy');}finally{document.body.removeChild(t);}});}else{var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();try{document.execCommand('copy');}finally{document.body.removeChild(t);} } return false;">
+           onclick="event.preventDefault();var text=this.getAttribute('data-link')||'';text=text.slice(1);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){alert('复制成功');}).catch(function(){var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();try{document.execCommand('copy');alert('复制成功');}finally{document.body.removeChild(t);}});}else{var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();try{document.execCommand('copy');alert('复制成功');}finally{document.body.removeChild(t);} } return false;">
             <i class="fa-brands fa-<%= icon %>"></i><!--
       ---></a>
         <% } else { %>
