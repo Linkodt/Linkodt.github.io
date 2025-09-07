@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: 林科达的博客
+subtitle: '分享前端知识跟面试经验'
+description: '自己的个人博客，记录算法题、个人相关的面经、前端的知识'
+keywords: 前端, vue, react, express
+author: kodtLin
+language: zh-CN
+timezone: 'Asia/Guangzhou'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
