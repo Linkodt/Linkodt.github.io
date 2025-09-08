@@ -46,7 +46,7 @@ social_links:
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
-tags_overview: false
+tags_overview: true
 
 # Customize the overview with the most recent blog posts on the index page.
 # Options:
@@ -54,7 +54,7 @@ tags_overview: false
 #   - post_count: whether to show only the x most recent posts.
 #   - sort_updated: sort posts by last modification date instead of creation date.
 posts_overview:
-  show_all_posts: false
+  show_all_posts: true
   post_count: 5
   sort_updated: false
 
@@ -75,16 +75,20 @@ post:
 # Customize the copyright years
 # Note: if start_year/end_year not provided, will use current year.
 copyright:
-  start_year: 2016
-  end_year:
+  start_year: 2024
+  end_year: 2025
 
 # Customize the 404 page
 # Options:
 #   - enabled: whether to enable the 404 page (404.html).
 error_404:
   enabled: true
-  title: "404 Page Not Found"
-  description: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+  title: "没有找到网页 NOT FOUND"
+  description: "请回到首页, Please return the first page, https://linkodt.github.io/"
+  back_to_home: "返回首页"
+  back_to_articles: "返回文章列表"
+  back_to_projects: "返回项目列表"
+  back_to_top: "返回顶部"
 
 
 ##############################################################################
