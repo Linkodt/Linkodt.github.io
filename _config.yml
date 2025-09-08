@@ -9,7 +9,7 @@ description: '自己的个人博客，记录算法题、个人相关的面经、
 keywords: 前端, vue, react, express
 author: kodtLin
 language: zh-CN
-timezone: 'Asia/Guangzhou'
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
