@@ -103,5 +103,5 @@ theme: cactus
 deploy:
   type: git
   repo: 
-    origin: https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO.git
+    origin: git@github.com:Linkodt/Linkodt.github.io.git
   branch: gh-pages
