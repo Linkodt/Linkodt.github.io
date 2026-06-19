@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="手写代码手写vue的reactive响应式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端手写代码">
+<meta property="og:url" content="https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:site_name" content="林科达的博客">
+<meta property="og:description" content="手写代码手写vue的reactive响应式12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-08T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-02T01:54:00.197Z">
+<meta property="article:author" content="kodtLin">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="手写代码">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>前端手写代码</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/09/08/ai-chat%20%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E5%8A%9F%E8%83%BD/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2025/09/03/%E9%A3%9E%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&text=前端手写代码"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&is_video=false&description=前端手写代码"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端手写代码&body=Check out this article: https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&name=前端手写代码&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&t=前端手写代码"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">手写代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99vue%E7%9A%84reactive%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">手写vue的reactive响应式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99Object-Create"><span class="toc-number">1.2.</span> <span class="toc-text">手写Object.Create</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-instanceOf"><span class="toc-number">1.3.</span> <span class="toc-text">手写 instanceOf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-new"><span class="toc-number">1.4.</span> <span class="toc-text">手写 new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-Promise-all"><span class="toc-number">1.5.</span> <span class="toc-text">手写 Promise.all</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-Promise-allSettled"><span class="toc-number">1.6.</span> <span class="toc-text">手写 Promise.allSettled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81"><span class="toc-number">1.7.</span> <span class="toc-text">手写防抖节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-call%E3%80%81apply%E3%80%81bind"><span class="toc-number">1.8.</span> <span class="toc-text">手写 call、apply、bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E5%8D%83%E5%88%86%E4%BD%8D"><span class="toc-number">1.9.</span> <span class="toc-text">手写千分位</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        前端手写代码
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">kodtLin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-09-08T02:00:00.000Z" class="dt-published" itemprop="datePublished">2025-09-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="p-category" href="/tags/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/" rel="tag">手写代码</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="手写代码"><a href="#手写代码" class="headerlink" title="手写代码"></a>手写代码</h2><h3 id="手写vue的reactive响应式"><a href="#手写vue的reactive响应式" class="headerlink" title="手写vue的reactive响应式"></a>手写vue的reactive响应式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 依赖跟踪系统</span></span><br><span class="line"><span class="keyword">const</span> targetMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>(); <span class="comment">// 存储 target -&gt; key -&gt; effects 的映射</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> activeEffect = <span class="literal">null</span>; <span class="comment">// 当前激活的副作用函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 副作用函数包裹器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">fn</span> - 需要响应式执行的函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">effect</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">runner</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    activeEffect = runner;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">fn</span>(); <span class="comment">// 执行副作用函数</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="title function_">runner</span>(); <span class="comment">// 立即执行一次</span></span><br><span class="line">  <span class="keyword">return</span> runner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 依赖收集（track）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; <span class="variable">target</span> - 目标对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string|Symbol</span>&#125; <span class="variable">key</span> - 属性名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">track</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!activeEffect) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> depsMap = targetMap.<span class="title function_">get</span>(target);</span><br><span class="line">  <span class="keyword">if</span> (!depsMap) &#123;</span><br><span class="line">    targetMap.<span class="title function_">set</span>(target, (depsMap = <span class="keyword">new</span> <span class="title class_">Map</span>()));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> dep = depsMap.<span class="title function_">get</span>(key);</span><br><span class="line">  <span class="keyword">if</span> (!dep) &#123;</span><br><span class="line">    depsMap.<span class="title function_">set</span>(key, (dep = <span class="keyword">new</span> <span class="title class_">Set</span>()));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!dep.<span class="title function_">has</span>(activeEffect)) &#123;</span><br><span class="line">    dep.<span class="title function_">add</span>(activeEffect); <span class="comment">// 收集当前副作用函数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 触发更新（trigger）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; <span class="variable">target</span> - 目标对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string|Symbol</span>&#125; <span class="variable">key</span> - 属性名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> depsMap = targetMap.<span class="title function_">get</span>(target);</span><br><span class="line">  <span class="keyword">if</span> (!depsMap) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> effects = depsMap.<span class="title function_">get</span>(key);</span><br><span class="line">  <span class="keyword">if</span> (effects) &#123;</span><br><span class="line">    effects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effect</span> =&gt;</span> <span class="title function_">effect</span>()); <span class="comment">// 执行所有依赖的副作用函数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建响应式对象（reactive）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; <span class="variable">target</span> - 普通对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Proxy</span>&#125; - 响应式代理对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">target</span>) &#123;</span><br><span class="line">  <span class="comment">// 如果已经是响应式对象，直接返回</span></span><br><span class="line">  <span class="keyword">if</span> (target &amp;&amp; target.<span class="property">__isReactive</span>) <span class="keyword">return</span> target;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建 Proxy 代理</span></span><br><span class="line">  <span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 依赖收集</span></span><br><span class="line">      <span class="title function_">track</span>(target, key);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 递归处理嵌套对象</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> result === <span class="string">&quot;object&quot;</span> &amp;&amp; result !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">reactive</span>(result); <span class="comment">// 深度代理</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> oldValue = target[key];</span><br><span class="line">      <span class="keyword">const</span> result = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 如果值未改变，不触发更新</span></span><br><span class="line">      <span class="keyword">if</span> (oldValue === value) <span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 触发更新</span></span><br><span class="line">      <span class="title function_">trigger</span>(target, key);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 标记为响应式对象</span></span><br><span class="line">  proxy.<span class="property">__isReactive</span> = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> proxy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写Object-Create"><a href="#手写Object-Create" class="headerlink" title="手写Object.Create"></a>手写Object.Create</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myCreate</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">F</span>(<span class="params"></span>) &#123;&#125;;</span><br><span class="line">    F.<span class="property"><span class="keyword">prototype</span></span> = obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">F</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-instanceOf"><a href="#手写-instanceOf" class="headerlink" title="手写 instanceOf"></a>手写 instanceOf</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myInstanceOf</span>(<span class="params">construtor, obj</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> proto = <span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(obj);</span><br><span class="line">    <span class="keyword">while</span>(proto) &#123;</span><br><span class="line">        <span class="keyword">if</span> (construtor === proto) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        proto = <span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(proto);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-new"><a href="#手写-new" class="headerlink" title="手写 new"></a>手写 new</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">obj, ...rest</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> newObj = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">    <span class="keyword">const</span> res = obj.<span class="title function_">call</span>(newObj, ...rest);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> result !== <span class="literal">null</span>) ? res : newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-Promise-all"><a href="#手写-Promise-all" class="headerlink" title="手写 Promise.all"></a>手写 Promise.all</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">promiseAll</span>(<span class="params">promises</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">const</span> len = promises.<span class="property">length</span>;</span><br><span class="line">        <span class="keyword">let</span> res = [];</span><br><span class="line">        promises.<span class="title function_">forEach</span>(<span class="function"><span class="params">promise</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(promise).<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">                res[count] = result;</span><br><span class="line">                count++;</span><br><span class="line">                <span class="keyword">if</span> (count === len) &#123;</span><br><span class="line">                    <span class="title function_">resolve</span>(res);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="params">rej</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(rej);</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-Promise-allSettled"><a href="#手写-Promise-allSettled" class="headerlink" title="手写 Promise.allSettled"></a>手写 Promise.allSettled</h3><p>不管是什么都存起来 最终返回</p>
+<h3 id="手写防抖节流"><a href="#手写防抖节流" class="headerlink" title="手写防抖节流"></a>手写防抖节流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 防抖</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fn, delay</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">fn</span>(...args)</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 节流</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, wait</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> time = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> cur = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="keyword">let</span> context = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="keyword">if</span> (cur - time &gt;= wait) &#123;</span><br><span class="line">            fn.<span class="title function_">appply</span>(context, ...args);</span><br><span class="line">            time = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写-call、apply、bind"><a href="#手写-call、apply、bind" class="headerlink" title="手写 call、apply、bind"></a>手写 call、apply、bind</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">mycall</span> = <span class="keyword">function</span>(<span class="params">context, ...args</span>) &#123;</span><br><span class="line">    context = context || <span class="variable language_">window</span>;</span><br><span class="line">    <span class="keyword">let</span> symbol = <span class="keyword">new</span> <span class="title class_">Symbol</span>(<span class="string">&#x27;call&#x27;</span>);</span><br><span class="line">    context[symbol] = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">const</span> res = context[symbol](...args);</span><br><span class="line">    <span class="keyword">delete</span> context[symbol]</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="手写千分位"><a href="#手写千分位" class="headerlink" title="手写千分位"></a>手写千分位</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">formatterNumber</span>(<span class="params">num</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> tempStr = num.<span class="title function_">toString</span>();</span><br><span class="line">	<span class="keyword">let</span> isNegative = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span> (tempStr.<span class="title function_">startsWith</span>(<span class="string">&#x27;-&#x27;</span>)) &#123;</span><br><span class="line">		isNegative = <span class="literal">true</span>;</span><br><span class="line">        tempStr = tempStr.<span class="title function_">slice</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">const</span> [integerPart, decimalPart] = tempStr.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> parts = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = integerPart.<span class="property">length</span>; i &gt; <span class="number">0</span>; i -= <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> start = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, i - <span class="number">3</span>);</span><br><span class="line">        parts.<span class="title function_">unshift</span>(integerPart.<span class="title function_">slice</span>(start, i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> res = [parts.<span class="title function_">join</span>(<span class="string">&#x27;,&#x27;</span>)];</span><br><span class="line">    decimalPart&amp;&amp;res.<span class="title function_">push</span>(decimalPart);</span><br><span class="line">    <span class="keyword">if</span> (isNegative) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`-<span class="subst">$&#123;res.join(<span class="string">&#x27;.&#x27;</span>)&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">join</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">手写代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99vue%E7%9A%84reactive%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">手写vue的reactive响应式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99Object-Create"><span class="toc-number">1.2.</span> <span class="toc-text">手写Object.Create</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-instanceOf"><span class="toc-number">1.3.</span> <span class="toc-text">手写 instanceOf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-new"><span class="toc-number">1.4.</span> <span class="toc-text">手写 new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-Promise-all"><span class="toc-number">1.5.</span> <span class="toc-text">手写 Promise.all</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-Promise-allSettled"><span class="toc-number">1.6.</span> <span class="toc-text">手写 Promise.allSettled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81"><span class="toc-number">1.7.</span> <span class="toc-text">手写防抖节流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99-call%E3%80%81apply%E3%80%81bind"><span class="toc-number">1.8.</span> <span class="toc-text">手写 call、apply、bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%86%99%E5%8D%83%E5%88%86%E4%BD%8D"><span class="toc-number">1.9.</span> <span class="toc-text">手写千分位</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&text=前端手写代码"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&is_video=false&description=前端手写代码"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端手写代码&body=Check out this article: https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&title=前端手写代码"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&name=前端手写代码&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/09/08/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81/&t=前端手写代码"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    kodtLin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

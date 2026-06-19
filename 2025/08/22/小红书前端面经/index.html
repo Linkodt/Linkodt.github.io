@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在线协同作业，怎么保证用户操作的一致性？OT操作，原子化，如果A用户删除、B用户编辑了同一段文本，可以考虑以删除为高优先级的操作。  如果在一个几十万节点的树状svg中需要展开显示树最深层节点，应该怎么实现？  用viewBox进行分页 初始化渲染时filter出viewBox范围内的节点并展示 或者更改viewbox的值，会自动展示出该区域的图形。   访问者模式的优缺点。有什么经典的前端场景">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小红书前端面经">
+<meta property="og:url" content="https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/index.html">
+<meta property="og:site_name" content="林科达的博客">
+<meta property="og:description" content="在线协同作业，怎么保证用户操作的一致性？OT操作，原子化，如果A用户删除、B用户编辑了同一段文本，可以考虑以删除为高优先级的操作。  如果在一个几十万节点的树状svg中需要展开显示树最深层节点，应该怎么实现？  用viewBox进行分页 初始化渲染时filter出viewBox范围内的节点并展示 或者更改viewbox的值，会自动展示出该区域的图形。   访问者模式的优缺点。有什么经典的前端场景">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-22T13:32:24.000Z">
+<meta property="article:modified_time" content="2026-06-02T01:54:00.197Z">
+<meta property="article:author" content="kodtLin">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="面经">
+<meta property="article:tag" content="小红书">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>小红书前端面经</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/09/03/%E9%A3%9E%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&text=小红书前端面经"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&is_video=false&description=小红书前端面经"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=小红书前端面经&body=Check out this article: https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&name=小红书前端面经&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&t=小红书前端面经"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        小红书前端面经
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">kodtLin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-08-22T13:32:24.000Z" class="dt-published" itemprop="datePublished">2025-08-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="p-category" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a>, <a class="p-category" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <ol>
+<li><p>在线协同作业，怎么保证用户操作的一致性？<br>OT操作，原子化，如果A用户删除、B用户编辑了同一段文本，可以考虑以删除为高优先级的操作。</p>
+</li>
+<li><p>如果在一个几十万节点的树状svg中需要展开显示树最深层节点，应该怎么实现？</p>
+<ol>
+<li>用viewBox进行分页</li>
+<li>初始化渲染时filter出viewBox范围内的节点并展示</li>
+<li>或者更改viewbox的值，会自动展示出该区域的图形。</li>
+</ol>
+</li>
+<li><p>访问者模式的优缺点。有什么经典的前端场景用到了访问者模式</p>
+<ol>
+<li>优点：针对同个数据类型的扩展接入即可使用。逻辑跟渲染分离。</li>
+<li>缺点：如果数据类型改变，所有访问者类都需要更改。</li>
+<li>AST树的babel转换。<br>抽象语法树（AST）的处理 - 最经典的案例<br>这是访问者模式在前端最强大、最普遍的应用场景。几乎所有的主流工具都依赖于对 AST 的遍历和修改。<ul>
+<li><strong>场景</strong>：Babel、ESLint、Prettier、Webpack、TypeScript Compiler 等工具的核心。</li>
+<li><strong>数据结构</strong>：AST（你的代码被解析后形成的树状结构）。这个结构非常稳定，节点类型（如 <code>FunctionDeclaration</code>, <code>VariableDeclarator</code>, <code>IfStatement</code>）是固定的。</li>
+<li><strong>访问者</strong>：Babel 插件、ESLint 规则、Prettier 的格式化器。</li>
+<li><strong>如何工作</strong>：<ol>
+<li>工具（如 Babel）将源代码解析成 AST。</li>
+<li>你提供的“访问者”对象被传递给遍历器。这个对象的属性名是 AST 节点类型（如 <code>Identifier</code>, <code>CallExpression</code>），属性值是处理这些节点的函数。</li>
+<li>遍历器会按照某种顺序（深度优先）遍历 AST 的每一个节点。</li>
+<li>每当遇到一个节点类型与访问者对象中的属性名匹配时，就调用该属性对应的函数，并将当前节点作为参数传入。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>websocket跟http的区别</p>
+<ol>
+<li>websocket 全双工，可以互发消息</li>
+<li>http每次请求都会有请求头，开销大</li>
+<li>http只能通过轮询获得服务器消息</li>
+<li>http的主动推送也跟websocket的服务器发消息不同</li>
+</ol>
+</li>
+<li><p>音视频通信的流程（webRTC）</p>
+<ol>
+<li>媒体流采集<br>浏览器通过 getUserMedia() 获取本地音视频流。</li>
+<li>信令交换<ol>
+<li>浏览器 A 创建 RTCPeerConnection 并生成 Offer SDP，通过 WebSocket 发送给服务器。</li>
+<li>服务器将 Offer 转发给浏览器 B。</li>
+<li>浏览器 B 创建 RTCPeerConnection，接收 Offer 并生成 Answer SDP，通过 WebSocket 发送给服务器。</li>
+<li>服务器将 Answer 转发给浏览器 A</li>
+</ol>
+</li>
+<li>ICE 候选交换<ul>
+<li>浏览器 A&#x2F;B 通过 onicecandidate 事件收集本地 ICE 候选（如 STUN 服务器地址），并通过 WebSocket 发送给对方。</li>
+<li>对方将 ICE 候选添加到 RTCPeerConnection 中。<br>建立 P2P 连接</li>
+</ul>
+</li>
+<li>通过 ICE 协议匹配双方的网络地址，建立直接的 P2P 连接，音视频数据通过该连接传输。<ol>
+<li>音视频播放</li>
+<li>浏览器 A&#x2F;B 通过 ontrack 事件接收远程音视频流，并绑定到  元素播放。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>算法：有个AOE技能在坐标[x,y]释放，会优先命中target数量的敌人，给出敌人坐标分布、技能释放坐标、能够命中的敌人数，请返回被命中的敌人坐标。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大根堆</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MaxTree</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">size, target</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span> = [<span class="title class_">Infinity</span>];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">target</span> = target;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">size</span> = size + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">add</span>(<span class="params">coordinates</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(coordinates);</span><br><span class="line">        <span class="keyword">const</span> maxDistance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">queue</span>.<span class="property">length</span> &gt;= <span class="variable language_">this</span>.<span class="property">size</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (distance &lt; maxDistance) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">queue</span>[<span class="number">1</span>] = coordinates;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">downFloat</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span>.<span class="title function_">push</span>(coordinates);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">getDistance</span>(<span class="params">coordinates</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = (coordinates[<span class="number">0</span>] - <span class="variable language_">this</span>.<span class="property">target</span>[<span class="number">0</span>])**<span class="number">2</span> + (coordinates[<span class="number">1</span>] - <span class="variable language_">this</span>.<span class="property">target</span>[<span class="number">1</span>])**<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">downFloat</span>(<span class="params">index</span>) &#123;</span><br><span class="line">        <span class="comment">// 0 1 2 3 4 5 6</span></span><br><span class="line">        <span class="keyword">const</span> left = index * <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">const</span> right = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= <span class="variable language_">this</span>.<span class="property">queue</span>.<span class="property">length</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[index]);</span><br><span class="line">        <span class="keyword">const</span> leftDistance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[left]);</span><br><span class="line">        <span class="keyword">const</span> rightDistance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[right]);</span><br><span class="line">        <span class="keyword">if</span> (distance &gt; leftDistance &amp;&amp; distance &gt; rightDistance) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (leftDistance &gt; rightDistance) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">queue</span>[index] = <span class="variable language_">this</span>.<span class="property">queue</span>[left];</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">queue</span>[left] = coordinates;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">downFloat</span>(left);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">queue</span>[index] = <span class="variable language_">this</span>.<span class="property">queue</span>[right];</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">queue</span>[right] = coordinates;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">downFloat</span>(right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> val = <span class="variable language_">this</span>.<span class="property">queue</span>[<span class="number">1</span>];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span>[<span class="number">1</span>] = <span class="variable language_">this</span>.<span class="property">queue</span>[<span class="variable language_">this</span>.<span class="property">queue</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span>.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">downFloat</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">upFloat</span>(<span class="params">index</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> parent = index &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">const</span> distance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[index]);</span><br><span class="line">        <span class="keyword">const</span> parentDistance = <span class="variable language_">this</span>.<span class="title function_">getDistance</span>(<span class="variable language_">this</span>.<span class="property">queue</span>[parent]);</span><br><span class="line">        <span class="keyword">if</span> (distance &lt; parentDistance) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span>[index] = <span class="variable language_">this</span>.<span class="property">queue</span>[parent];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">queue</span>[parent] = <span class="variable language_">this</span>.<span class="property">queue</span>[index];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">upFloat</span>(parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&text=小红书前端面经"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&is_video=false&description=小红书前端面经"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=小红书前端面经&body=Check out this article: https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=小红书前端面经"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&name=小红书前端面经&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&t=小红书前端面经"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    kodtLin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

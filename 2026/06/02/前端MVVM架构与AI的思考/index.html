@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前端 MVVM 架构与 AI 的思考前言近年来，AI 在前端领域的应用发展迅速。从代码补全到 UI 生成，AI 正在重塑前端的开发方式。本文从 MVVM 架构的视角出发，探讨 AI 在各层的应用现状与未来方向。 MVVM 架构回顾MVVM（Model-View-ViewModel）是一种成熟的架构模式，将界面关注点分离：    层级 职责 典型技术    M (Model) 数据模型、业务逻辑、数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端MVVM架构与AI的思考">
+<meta property="og:url" content="https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="林科达的博客">
+<meta property="og:description" content="前端 MVVM 架构与 AI 的思考前言近年来，AI 在前端领域的应用发展迅速。从代码补全到 UI 生成，AI 正在重塑前端的开发方式。本文从 MVVM 架构的视角出发，探讨 AI 在各层的应用现状与未来方向。 MVVM 架构回顾MVVM（Model-View-ViewModel）是一种成熟的架构模式，将界面关注点分离：    层级 职责 典型技术    M (Model) 数据模型、业务逻辑、数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-02T01:59:35.215Z">
+<meta property="article:author" content="kodtLin">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="架构">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>前端MVVM架构与AI的思考</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2026/06/19/Multica%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2026/04/17/%E4%BB%8B%E7%BB%8DupdateWhat%E9%A1%B9%E7%9B%AE%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95%E8%A7%84%E5%88%92/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&text=前端MVVM架构与AI的思考"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&is_video=false&description=前端MVVM架构与AI的思考"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端MVVM架构与AI的思考&body=Check out this article: https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&name=前端MVVM架构与AI的思考&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&t=前端MVVM架构与AI的思考"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF-MVVM-%E6%9E%B6%E6%9E%84%E4%B8%8E-AI-%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">前端 MVVM 架构与 AI 的思考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVVM-%E6%9E%B6%E6%9E%84%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.2.</span> <span class="toc-text">MVVM 架构回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E5%9C%A8%E5%90%84%E5%B1%82%E7%9A%84%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6"><span class="toc-number">1.3.</span> <span class="toc-text">AI 在各层的应用现状</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%B1%82%EF%BC%88M%EF%BC%89%E2%80%94%E2%80%94-AI-%E5%8F%91%E6%8C%A5%E7%A9%BA%E9%97%B4%E5%A4%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">模型层（M）—— AI 发挥空间大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E6%A8%A1%E5%9E%8B%E5%B1%82%EF%BC%88VM%EF%BC%89%E2%80%94%E2%80%94-AI-%E7%9A%84%E4%B8%BB%E6%88%98%E5%9C%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">视图模型层（VM）—— AI 的主战场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%B1%82%EF%BC%88V%EF%BC%89%E2%80%94%E2%80%94-%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%88%86%E6%B0%B4%E5%B2%AD"><span class="toc-number">1.3.3.</span> <span class="toc-text">视图层（V）—— 真正的分水岭</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E7%9A%84%E4%B8%BB%E6%B5%81%E6%96%B9%E6%A1%88%EF%BC%9AFigma-%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">当前的主流方案：Figma 生成代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E6%8E%A2%E7%B4%A2%E6%96%B9%E5%90%91%EF%BC%9ADOM-%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">新的探索方向：DOM 结构与样式分离</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">1.4.</span> <span class="toc-text">思考与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.5.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        前端MVVM架构与AI的思考
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">kodtLin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-06-02T02:00:00.000Z" class="dt-published" itemprop="datePublished">2026-06-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AI/" rel="tag">AI</a>, <a class="p-category" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="p-category" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="前端-MVVM-架构与-AI-的思考"><a href="#前端-MVVM-架构与-AI-的思考" class="headerlink" title="前端 MVVM 架构与 AI 的思考"></a>前端 MVVM 架构与 AI 的思考</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近年来，AI 在前端领域的应用发展迅速。从代码补全到 UI 生成，AI 正在重塑前端的开发方式。本文从 MVVM 架构的视角出发，探讨 AI 在各层的应用现状与未来方向。</p>
+<h2 id="MVVM-架构回顾"><a href="#MVVM-架构回顾" class="headerlink" title="MVVM 架构回顾"></a>MVVM 架构回顾</h2><p>MVVM（Model-View-ViewModel）是一种成熟的架构模式，将界面关注点分离：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>职责</th>
+<th>典型技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>M</strong> (Model)</td>
+<td>数据模型、业务逻辑、数据处理</td>
+<td>API 接口、数据层服务</td>
+</tr>
+<tr>
+<td><strong>VM</strong> (ViewModel)</td>
+<td>视图状态管理、数据绑定、逻辑编排</td>
+<td>Vue 的 Composition API、React 的 Hooks</td>
+</tr>
+<tr>
+<td><strong>V</strong> (View)</td>
+<td>页面结构、样式、交互呈现</td>
+<td>HTML&#x2F;CSS、组件模板</td>
+</tr>
+</tbody></table>
+<h2 id="AI-在各层的应用现状"><a href="#AI-在各层的应用现状" class="headerlink" title="AI 在各层的应用现状"></a>AI 在各层的应用现状</h2><h3 id="模型层（M）——-AI-发挥空间大"><a href="#模型层（M）——-AI-发挥空间大" class="headerlink" title="模型层（M）—— AI 发挥空间大"></a>模型层（M）—— AI 发挥空间大</h3><p>在模型层，AI 已经能够高效地：</p>
+<ul>
+<li><strong>生成 API 调用代码</strong>：根据接口文档自动生成请求逻辑</li>
+<li><strong>处理数据转换</strong>：JSON 解析、格式化、验证</li>
+<li><strong>编写业务逻辑</strong>：条件判断、流程编排</li>
+</ul>
+<p>这些工作有明确的输入输出，AI 容易理解和生成高质量代码。</p>
+<h3 id="视图模型层（VM）——-AI-的主战场"><a href="#视图模型层（VM）——-AI-的主战场" class="headerlink" title="视图模型层（VM）—— AI 的主战场"></a>视图模型层（VM）—— AI 的主战场</h3><p>视图模型层是 AI 发挥最充分的地方：</p>
+<ul>
+<li><strong>状态管理逻辑</strong>：自动生成响应式状态定义</li>
+<li><strong>数据绑定逻辑</strong>：双向绑定的处理</li>
+<li><strong>业务逻辑编排</strong>：用户操作的响应处理</li>
+<li><strong>生命周期管理</strong>：副作用清理、异步处理</li>
+</ul>
+<p>得益于这个层面的逻辑相对规范、AI 训练数据丰富，生成效果普遍较好。</p>
+<h3 id="视图层（V）——-真正的分水岭"><a href="#视图层（V）——-真正的分水岭" class="headerlink" title="视图层（V）—— 真正的分水岭"></a>视图层（V）—— 真正的分水岭</h3><p>视图层是 AI 介入最困难的地方，也是<strong>公司之间拉开差距的关键</strong>。</p>
+<h4 id="当前的主流方案：Figma-生成代码"><a href="#当前的主流方案：Figma-生成代码" class="headerlink" title="当前的主流方案：Figma 生成代码"></a>当前的主流方案：Figma 生成代码</h4><p>很多团队采用 Figma + 插件（如 Figma to Code）生成 UI 代码。但存在两个核心限制：</p>
+<ol>
+<li><strong>设计规范的局限</strong>：生成的代码依赖设计稿的样式定义，设计师的风格直接决定了代码质量</li>
+<li><strong>还原度的局限</strong>：设计稿与实现之间总存在差距，间距、颜色、字体等细节需要人工调整</li>
+</ol>
+<h4 id="新的探索方向：DOM-结构与样式分离"><a href="#新的探索方向：DOM-结构与样式分离" class="headerlink" title="新的探索方向：DOM 结构与样式分离"></a>新的探索方向：DOM 结构与样式分离</h4><p>一个值得思考的方向是：<strong>让 Figma 只生成 DOM 结构，样式由前端主动赋予</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">传统流程：</span><br><span class="line">Figma 设计稿 → Figma 生成完整代码（DOM + 样式）→ 人工微调</span><br><span class="line"></span><br><span class="line">新思路：</span><br><span class="line">Figma 设计稿 → 只提取 DOM 结构（层级关系）→ 前端主动赋予样式</span><br></pre></td></tr></table></figure>
+
+<p>这样做的好处是：</p>
+<ul>
+<li><strong>DOM 结构是确定的</strong>：一个按钮就是一个 <code>&lt;button&gt;</code>，一个列表就是 <code>&lt;ul&gt;&lt;li&gt;</code>，AI 可以准确提取</li>
+<li><strong>样式是可控的</strong>：由前端基于设计规范主动编写，保证一致性和可维护性</li>
+<li><strong>设计稿验证更纯粹</strong>：设计师负责结构合理性，前端负责实现质量</li>
+</ul>
+<h2 id="思考与展望"><a href="#思考与展望" class="headerlink" title="思考与展望"></a>思考与展望</h2><p>AI 在前端的发展，本质上是将<strong>确定性工作自动化</strong>的过程：</p>
+<ul>
+<li>模型层和视图模型层的逻辑相对确定，AI 介入效果好</li>
+<li>视图层的结构相对确定（HTML 语义），但样式充满变化</li>
+</ul>
+<p>未来的方向或许是：<strong>AI 更专注于逻辑层，设计师和前端共同把控视图层</strong>。两者各司其职，而不是让 AI 盲目生成一切。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>技术架构的价值在于分层解耦。MVVM 给了我们一个很好的视角：在合适的层次做合适的事。AI 不是要取代前端，而是要帮助前端从重复劳动中解放，专注于真正需要创造力的部分。</p>
+<hr>
+<p><em>欢迎留言讨论你在项目中是如何平衡 AI 辅助与人工把控的。</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF-MVVM-%E6%9E%B6%E6%9E%84%E4%B8%8E-AI-%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-number">1.</span> <span class="toc-text">前端 MVVM 架构与 AI 的思考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVVM-%E6%9E%B6%E6%9E%84%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.2.</span> <span class="toc-text">MVVM 架构回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI-%E5%9C%A8%E5%90%84%E5%B1%82%E7%9A%84%E5%BA%94%E7%94%A8%E7%8E%B0%E7%8A%B6"><span class="toc-number">1.3.</span> <span class="toc-text">AI 在各层的应用现状</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%B1%82%EF%BC%88M%EF%BC%89%E2%80%94%E2%80%94-AI-%E5%8F%91%E6%8C%A5%E7%A9%BA%E9%97%B4%E5%A4%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">模型层（M）—— AI 发挥空间大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E6%A8%A1%E5%9E%8B%E5%B1%82%EF%BC%88VM%EF%BC%89%E2%80%94%E2%80%94-AI-%E7%9A%84%E4%B8%BB%E6%88%98%E5%9C%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">视图模型层（VM）—— AI 的主战场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%B1%82%EF%BC%88V%EF%BC%89%E2%80%94%E2%80%94-%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%88%86%E6%B0%B4%E5%B2%AD"><span class="toc-number">1.3.3.</span> <span class="toc-text">视图层（V）—— 真正的分水岭</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E7%9A%84%E4%B8%BB%E6%B5%81%E6%96%B9%E6%A1%88%EF%BC%9AFigma-%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">当前的主流方案：Figma 生成代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E7%9A%84%E6%8E%A2%E7%B4%A2%E6%96%B9%E5%90%91%EF%BC%9ADOM-%E7%BB%93%E6%9E%84%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">新的探索方向：DOM 结构与样式分离</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">1.4.</span> <span class="toc-text">思考与展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.5.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&text=前端MVVM架构与AI的思考"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&is_video=false&description=前端MVVM架构与AI的思考"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端MVVM架构与AI的思考&body=Check out this article: https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&title=前端MVVM架构与AI的思考"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&name=前端MVVM架构与AI的思考&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2026/06/02/%E5%89%8D%E7%AB%AFMVVM%E6%9E%B6%E6%9E%84%E4%B8%8EAI%E7%9A%84%E6%80%9D%E8%80%83/&t=前端MVVM架构与AI的思考"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    kodtLin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

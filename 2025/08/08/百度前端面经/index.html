@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="flex: 1.  flex: 1 跟 flex 1 0 0% 一样。 flex默认是 0 1 auto。 flex-grow: 放大比例 如果有剩余空间会放大 flex-shrink: 缩小比例，空间不足会缩小 flex-basis: 定义项目初始大小，设置0%，项目在分配剩余空间前的初始大小为0.   导出的模块更新，怎么让开发无感升级（模块联邦）  启动服务：分别启动远程应用（通常在 30">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端面经">
+<meta property="og:url" content="https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/index.html">
+<meta property="og:site_name" content="林科达的博客">
+<meta property="og:description" content="flex: 1.  flex: 1 跟 flex 1 0 0% 一样。 flex默认是 0 1 auto。 flex-grow: 放大比例 如果有剩余空间会放大 flex-shrink: 缩小比例，空间不足会缩小 flex-basis: 定义项目初始大小，设置0%，项目在分配剩余空间前的初始大小为0.   导出的模块更新，怎么让开发无感升级（模块联邦）  启动服务：分别启动远程应用（通常在 30">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-08T14:10:34.000Z">
+<meta property="article:modified_time" content="2026-06-02T01:54:00.197Z">
+<meta property="article:author" content="kodtLin">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="面经">
+<meta property="article:tag" content="百度">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>百度前端面经</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/08/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&text=百度前端面经"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&is_video=false&description=百度前端面经"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=百度前端面经&body=Check out this article: https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&name=百度前端面经&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&t=百度前端面经"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        百度前端面经
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">kodtLin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-08-08T14:10:34.000Z" class="dt-published" itemprop="datePublished">2025-08-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="p-category" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a>, <a class="p-category" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <ol>
+<li><p>flex: 1.</p>
+<ol>
+<li>flex: 1 跟 flex 1 0 0% 一样。 flex默认是 0 1 auto。</li>
+<li>flex-grow: 放大比例 如果有剩余空间会放大</li>
+<li>flex-shrink: 缩小比例，空间不足会缩小</li>
+<li>flex-basis: 定义项目初始大小，设置0%，项目在分配剩余空间前的初始大小为0.</li>
+</ol>
+</li>
+<li><p>导出的模块更新，怎么让开发无感升级（模块联邦）</p>
+<ol>
+<li><p><strong>启动服务</strong>：分别启动远程应用（通常在 <code>3001</code> 端口）和宿主应用（通常在 <code>3000</code> 端口）。</p>
+</li>
+<li><p><strong>动态加载</strong>：当你在浏览器中访问宿主应用（<code>http://localhost:3000</code>）时，会发生：</p>
+<ul>
+<li>浏览器加载宿主应用的 <code>index.html</code> 和主要脚本。</li>
+<li>当代码执行到 <code>import(&#39;RemoteApp/Button&#39;)</code> 时，Webpack 会去配置的 URL（<code>http://localhost:3001/remoteEntry.js</code>） 加载远程应用的入口文件。</li>
+<li><code>remoteEntry.js</code> 像一个清单，告诉宿主如何获取 <code>Button</code> 组件等暴露的模块。</li>
+<li>宿主然后加载 <code>Button</code> 组件的具体代码块。</li>
+<li>由于配置了 <code>shared: [&#39;react&#39;]</code>，双方会协商使用同一个 <code>react</code> 实例，确保代码正确运行。</li>
+</ul>
+</li>
+<li><p><strong>渲染组件</strong>：远程组件成功加载后，就会在宿主应用中渲染出来。</p>
+</li>
+<li><p><code>requiredVersion</code>：<strong>这是版本控制的灵魂</strong>。它告诉 Webpack：“我这个模块&#x2F;应用<strong>兼容</strong>哪个版本的依赖”。它可以是一个 <code>string</code>（如 <code>&quot;^18.2.0&quot;</code>），也可以是 <code>package.json</code> 中的版本。Webpack 使用这个信息来寻找所有应用共同接受的版本。</p>
+</li>
+<li><p><code>singleton</code>：如果设置为 <code>true</code>，整个应用图（所有 Host 和 Remote）<strong>必须且只能使用一个实例</strong>。这对于 React、Vue、状态管理库等是必须的，因为多个实例会破坏上下文导致巨大错误。</p>
+</li>
+<li><p><code>eager</code>：允许 Webpack 直接在当前应用的 bundle 中包含该依赖，而不是异步加载它。这牺牲了共享的优势（每个应用都打包了一份），但可以避免额外的网络请求和潜在的版本冲突。通常设为 <code>false</code>。</p>
+</li>
+<li><p><code>strictVersion</code>：如果为 <code>true</code>，当协商出的版本不满足 <code>requiredVersion</code> 时，会发出警告，并且不会接受降级方案。通常与 <code>singleton: true</code> 一起使用，如果版本不匹配，宁愿让应用失败也不愿看到不可预测的行为。</p>
+</li>
+</ol>
+</li>
+<li><p>箭头函数的this指向</p>
+<ol>
+<li>箭头函数的this指向定义时的作用域上下文。</li>
+<li>普通函数的this指向调用时的作用域上下文。</li>
+</ol>
+</li>
+<li><p>position的可取值跟意思</p>
+<ol>
+<li>relative: 相对于自身位置</li>
+<li>absolute: 脱离文档流，相对于最近的一个确认定位(非static)的父元素 如果没有则相对于浏览器视口。</li>
+<li>static: 按照正常的文档流布局</li>
+<li>fixed: 相对于浏览器视口</li>
+<li>sticky: 没达到阈值之前时relative，达到后是fixed</li>
+</ol>
+</li>
+<li><p>算法：一长串字符串计算式的加减乘除</p>
+<ol>
+<li>栈处理，碰到乘除则弹出计算再放入。</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&text=百度前端面经"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&is_video=false&description=百度前端面经"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=百度前端面经&body=Check out this article: https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&title=百度前端面经"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&name=百度前端面经&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://linkodt.github.io/2025/08/08/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F/&t=百度前端面经"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    kodtLin
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Linkodt">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
